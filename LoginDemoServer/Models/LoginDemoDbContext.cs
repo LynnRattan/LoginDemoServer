@@ -15,7 +15,9 @@ public partial class LoginDemoDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Users> Users { get; set; }
+    public virtual DbSet<Grade> Grades { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -23,9 +25,14 @@ public partial class LoginDemoDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Users>(entity =>
+        modelBuilder.Entity<Grade>(entity =>
         {
-            entity.HasKey(e => e.Email).HasName("PK__Users__A9D1053531C8D56B");
+            entity.HasOne(d => d.StudentEmailNavigation).WithMany().HasConstraintName("FK_UsersToGrades");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Email).HasName("PK__Users__A9D1053543DCEDBE");
         });
 
         OnModelCreatingPartial(modelBuilder);

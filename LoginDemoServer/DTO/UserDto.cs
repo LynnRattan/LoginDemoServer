@@ -15,7 +15,7 @@ namespace LoginDemoServer.DTO
         }
 
         public UserDTO() { }
-        public UserDTO(Models.Users modelUser)
+        public UserDTO(Models.User modelUser)
         {
             this.PhoneNumber = modelUser.PhoneNumber;
             this.Name = modelUser.Name;

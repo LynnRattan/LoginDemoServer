@@ -35,7 +35,7 @@ namespace LoginDemoServer.Controllers
 
                 //Get model user class from DB with matching email. 
              
-                Models.Users modelsUser = context.GetUSerFromDB(loginDto.Email);
+                Models.User modelsUser = context.GetUserFromDB(loginDto.Email);
                 
                 //Check if user exist for this email and if password match, if not return Access Denied (Error 403) 
                 if (modelsUser == null || modelsUser.Password != loginDto.Password) 
@@ -73,9 +73,9 @@ namespace LoginDemoServer.Controllers
 
 
                 //user is logged in - lets check who is the user
-                Models.Users modelsUser = context.GetUSerFromDB(userEmail);
+                Models.User modelsUser = context.GetUserFromDB(userEmail);
              
-                return Ok(new DTO.Users(modelsUser));
+                return Ok(new DTO.UserDTO(modelsUser));
             }
             catch (Exception ex)
             {
@@ -84,6 +84,7 @@ namespace LoginDemoServer.Controllers
 
         }
 
+      
 
     }
 }
