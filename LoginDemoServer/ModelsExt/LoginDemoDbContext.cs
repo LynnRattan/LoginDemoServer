@@ -14,7 +14,13 @@ public partial class LoginDemoDbContext : DbContext
 
     //public Models.User GetUserGrades(string email)
     //{
-    //    return this.Users.Where(u => u.Email == email).Include(u=>u.Grade).FirstOrDefault();
+    //    return this.Users.Where(u => u.Email == email).Include(u => u.Grade).FirstOrDefault();
     //}
+
+    //public Models.User GetUserGrades(string email)
+    //{
+    //    return this.Users.Include(u => u.Grades).FirstOrDefault(u => u.Email == email);
+    //}
+
 }
 
