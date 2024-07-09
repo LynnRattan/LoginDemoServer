@@ -84,7 +84,37 @@ namespace LoginDemoServer.Controllers
 
         }
 
-      
+        public IActionResult GetUserGrades()
+        {
+            try
+            {
+                //Check if user is logged in 
+                string userEmail = HttpContext.Session.GetString("loggedInUser");
+
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return Unauthorized("User is not logged in");
+                }
+
+
+                //user is logged in
+                Models.User modelsUser = context.GetUserFromDB(userEmail);
+
+                return Ok(context.GetUserGrades(modelsUser.Email));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+    }
+
+
+
+
+
 
     }
 }
