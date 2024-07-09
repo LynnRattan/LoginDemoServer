@@ -99,8 +99,10 @@ namespace LoginDemoServer.Controllers
 
                 //user is logged in
                 Models.User modelsUser = context.GetUserFromDB(userEmail);
-
-                return Ok(context.GetUserGrades(modelsUser.Email));
+                if (modelsUser != null)
+                    return Ok(context.GetUserGrades(modelsUser.Email));
+                else
+                    return NotFound("User not found");
             }
             catch (Exception ex)
             {
